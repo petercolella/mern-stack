@@ -11,7 +11,10 @@ app.use(express.json());
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/demoDB');
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/demoDB',
+  { useNewUrlParser: true }
+);
 
 app.listen(PORT, function() {
   console.log(`Listening on PORT: ${PORT}`);
