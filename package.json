@@ -18,6 +18,7 @@
   "homepage": "https://github.com/petercolella/mern-stack#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "mongoose": "^5.4.5"
+    "mongoose": "^5.4.5",
+    "nodemon": "^1.18.9"
   }
 }

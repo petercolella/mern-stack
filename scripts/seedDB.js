@@ -7,7 +7,7 @@ mongoose.connect(
 );
 
 const userSeed = {
-  name: 'Fist Last',
+  name: 'First Last',
   email: 'me@me.com',
   password: 'password',
   date: new Date(Date.now())
