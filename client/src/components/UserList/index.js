@@ -3,11 +3,10 @@ import React from 'react';
 const UserList = props => {
   return (
     <ul>
-      {this.state.users.map(user => (
+      {props.users.map(user => (
         <li key={user._id}>
-          <p>
-            {user.name} {user.email}
-          </p>
+          <p>Name: {user.name}</p>
+          <p>Email: {user.email}</p>
         </li>
       ))}
     </ul>

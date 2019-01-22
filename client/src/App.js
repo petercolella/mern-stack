@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import LandingPage from './components/LandingPage';
+import Dashboard from './components/Dashboard';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="jumbotron">
-          <h1 className="display-4">Welcome to the Landing Page!</h1>
-          <p className="lead">Please Sign In.</p>
-        </div>
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/dashboard" component={Dashboard} />
+      </Switch>
+    </Router>
+  );
+};
 
 export default App;
