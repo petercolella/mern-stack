@@ -24,6 +24,7 @@
     "concurrently": "^4.1.0",
     "express": "^4.16.4",
     "mongoose": "^5.4.5",
-    "nodemon": "^1.18.9"
+    "nodemon": "^1.18.9",
+    "textbelt": "0.0.4"
   }
 }

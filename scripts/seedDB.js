@@ -6,15 +6,23 @@ mongoose.connect(
   { useNewUrlParser: true }
 );
 
-const userSeed = {
-  name: 'First Last',
-  email: 'me@me.com',
-  password: 'password',
-  date: new Date(Date.now())
-};
+const userSeed = [
+  {
+    name: 'First Last',
+    email: 'me@me.com',
+    password: 'password',
+    date: new Date(Date.now())
+  },
+  {
+    name: 'Some Name',
+    email: 'you@me.com',
+    password: 'password2',
+    date: new Date(Date.now())
+  }
+];
 
 db.User.deleteMany({})
-  .then(() => db.User.collection.insertOne(userSeed))
+  .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
     console.log(`${data.result.n} record(s) inserted.`);
     process.exit(0);
