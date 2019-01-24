@@ -9,9 +9,9 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "server": "node server.js",
-    "client": "cd client && yarn start",
+    "client": "cd client && npm start",
     "seed": "node scripts/seedDB.js",
-    "build": "cd client && yarn && yarn run build",
+    "build": "cd client && npm && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "repository": {
