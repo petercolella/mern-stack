@@ -10,13 +10,11 @@ const userSeed = [
   {
     name: 'First Last',
     email: 'me@me.com',
-    password: 'password',
     date: new Date(Date.now())
   },
   {
     name: 'Some Name',
     email: 'you@me.com',
-    password: 'password2',
     date: new Date(Date.now())
   }
 ];
