@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
 const styles = {
-  marginTop: 120
+  marginTop: 120,
+  imgStyle: {
+    height: 96,
+    width: 'auto'
+  }
 };
 
 class LandingPage extends Component {
   state = {
     currentUser: '',
-    currentUserMessage: '',
+    currentUserMessage: 'Please Sign In.',
     imageUrl: ''
   };
 
@@ -18,9 +22,7 @@ class LandingPage extends Component {
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-    if (!profile.getName()) {
-      this.setState({ currentUserMessage: 'Please Sign In.' });
-    } else {
+    if (profile.getName()) {
       this.setState({
         currentUser: profile.getName(),
         currentUserMessage: `Hello, ${profile.getName()}`,
@@ -57,7 +59,15 @@ class LandingPage extends Component {
           <h1 className="display-4">Welcome to the Landing Page!</h1>
           <hr />
           <p className="lead">{this.state.currentUserMessage}</p>
-          <img src={this.state.imageUrl} alt="profile-img" />
+          {this.state.imageUrl ? (
+            <img src={this.state.imageUrl} alt="profile-img" />
+          ) : (
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+              alt="profile-img"
+              style={styles.imgStyle}
+            />
+          )}
         </div>
         <div id="my-signin2" />
       </div>
