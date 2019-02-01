@@ -6,7 +6,9 @@ const styles = {
 
 class LandingPage extends Component {
   state = {
-    currentUser: ''
+    currentUser: '',
+    currentUserMessage: '',
+    imageUrl: ''
   };
 
   onSignIn = googleUser => {
@@ -17,9 +19,13 @@ class LandingPage extends Component {
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
     if (!profile.getName()) {
-      this.setState({ currentUser: 'Please Sign In.' });
+      this.setState({ currentUserMessage: 'Please Sign In.' });
     } else {
-      this.setState({ currentUser: profile.getName() });
+      this.setState({
+        currentUser: profile.getName(),
+        currentUserMessage: `Hello, ${profile.getName()}`,
+        imageUrl: profile.getImageUrl()
+      });
     }
   };
 
@@ -49,7 +55,9 @@ class LandingPage extends Component {
       <div style={styles} className="container">
         <div className="jumbotron">
           <h1 className="display-4">Welcome to the Landing Page!</h1>
-          <p className="lead">{this.state.currentUser}</p>
+          <hr />
+          <p className="lead">{this.state.currentUserMessage}</p>
+          <img src={this.state.imageUrl} alt="profile-img" />
         </div>
         <div id="my-signin2" />
       </div>
