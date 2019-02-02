@@ -48,7 +48,7 @@ class Modal extends Component {
               </div>
               <form>
                 <div className="form-group">
-                  <div className="col-10">
+                  <div className="col">
                     <input
                       type="text"
                       className="form-control"
@@ -69,7 +69,7 @@ class Modal extends Component {
                 </button>
                 <Link to={this.props.link}>
                   <button type="button" className="btn btn-secondary">
-                    Next Question
+                    Next
                   </button>
                 </Link>
               </div>
