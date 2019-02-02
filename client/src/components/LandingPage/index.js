@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import API from '../../utils/API';
 
 const styles = {
@@ -67,18 +68,30 @@ class LandingPage extends Component {
     return (
       <div style={styles} className="container">
         <div className="jumbotron">
-          <h1 className="display-4">Welcome to the Landing Page!</h1>
+          <h1 className="text-center display-4">
+            Welcome to the Landing Page!
+          </h1>
           <hr />
-          <p className="lead">{this.state.currentUserMessage}</p>
-          {this.state.imageUrl ? (
-            <img src={this.state.imageUrl} alt="profile-img" />
-          ) : (
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-              alt="profile-img"
-              style={styles.imgStyle}
-            />
-          )}
+          <div className="row">
+            <div className="col-4">
+              <p className="lead">{this.state.currentUserMessage}</p>
+              {this.state.imageUrl ? (
+                <img src={this.state.imageUrl} alt="profile-img" />
+              ) : (
+                <img
+                  src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                  alt="profile-img"
+                  style={styles.imgStyle}
+                />
+              )}
+            </div>
+            <div className="col-8">
+              <p>
+                Please click <Link to="/question">HERE</Link> to answer a
+                question.
+              </p>
+            </div>
+          </div>
         </div>
         <div id="my-signin2" />
       </div>
