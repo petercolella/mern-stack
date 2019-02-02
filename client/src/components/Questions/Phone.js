@@ -27,8 +27,9 @@ class Phone extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
     alert(`userField: ${this.state.userField}`);
+    const phoneRegEx = this.state.userField.replace(/\D/g, '');
     API.updateUser(this.state.User._id, {
-      phone: this.state.userField
+      phone: phoneRegEx
     });
   };
 
