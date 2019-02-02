@@ -7,7 +7,7 @@ class Phone extends Component {
     users: [],
     User: {},
     title: 'Phone Number',
-    placeholder: 'Enter here.',
+    placeholder: 'Enter here (no dashes or spaces).',
     question: 'what is your phone number?',
     userField: '',
     nextQuestionLink: '/dashboard'
