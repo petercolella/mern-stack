@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import API from '../../utils/API';
 
 const styles = {
   marginTop: 120,
@@ -15,6 +16,14 @@ class LandingPage extends Component {
     imageUrl: ''
   };
 
+  createUser(profile) {
+    API.saveUser({
+      name: profile.getName(),
+      email: profile.getEmail(),
+      imageUrl: profile.getImageUrl()
+    });
+  }
+
   onSignIn = googleUser => {
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
@@ -29,6 +38,8 @@ class LandingPage extends Component {
         imageUrl: profile.getImageUrl()
       });
     }
+
+    this.createUser(googleUser.getBasicProfile());
   };
 
   onSuccess(googleUser) {
