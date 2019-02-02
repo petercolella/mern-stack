@@ -22,6 +22,8 @@ class LandingPage extends Component {
       name: profile.getName(),
       email: profile.getEmail(),
       imageUrl: profile.getImageUrl()
+    }).catch(err => {
+      console.log(err);
     });
   }
 
