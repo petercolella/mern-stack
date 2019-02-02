@@ -7,6 +7,7 @@ const UserList = props => {
         <li key={user._id}>
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
+          <p>Phone Number: {user.phone}</p>
         </li>
       ))}
     </ul>
