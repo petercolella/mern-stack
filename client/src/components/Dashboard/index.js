@@ -4,9 +4,7 @@ import API from '../../utils/API';
 
 class Dashboard extends Component {
   state = {
-    users: [],
-    name: '',
-    email: ''
+    users: []
   };
 
   componentDidMount() {
@@ -14,9 +12,7 @@ class Dashboard extends Component {
   }
 
   loadUserInfo = () => {
-    API.getUsers().then(res =>
-      this.setState({ users: res.data, name: '', email: '' })
-    );
+    API.getUsers().then(res => this.setState({ users: res.data }));
   };
 
   render() {
