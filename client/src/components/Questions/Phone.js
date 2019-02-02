@@ -7,7 +7,8 @@ class Anniversary extends Component {
     users: [],
     User: {},
     title: 'Phone Number',
-    question: 'What is your phone number?',
+    placeholder: 'Enter here.',
+    question: 'what is your phone number?',
     userField: '',
     nextQuestionLink: '/dashboard'
   };
@@ -46,6 +47,7 @@ class Anniversary extends Component {
         question={this.state.question}
         userField={this.state.userField}
         link={this.state.nextQuestionLink}
+        placeholder={this.state.placeholder}
         title={this.state.title}
         user={this.state.User}
       />

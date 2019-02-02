@@ -48,13 +48,16 @@ class Modal extends Component {
               </div>
               <form>
                 <div className="form-group">
-                  <input
-                    onChange={this.props.handleInputChange}
-                    value={this.props.userField}
-                    name="userField"
-                    placeholder="placeholder"
-                    type="text"
-                  />
+                  <div className="col-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={this.props.handleInputChange}
+                      value={this.props.userField}
+                      name="userField"
+                      placeholder={this.props.placeholder}
+                    />
+                  </div>
                 </div>
               </form>
               <div className="modal-footer">
