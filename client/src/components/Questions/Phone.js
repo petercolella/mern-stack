@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Modal from '../Modal';
 import API from '../../utils/API';
 
-class Anniversary extends Component {
+class Phone extends Component {
   state = {
     users: [],
     User: {},
@@ -28,7 +28,7 @@ class Anniversary extends Component {
     event.preventDefault();
     alert(`userField: ${this.state.userField}`);
     API.updateUser(this.state.User._id, {
-      anniversaryDate: this.state.userField
+      phone: this.state.userField
     });
   };
 
@@ -55,4 +55,4 @@ class Anniversary extends Component {
   }
 }
 
-export default Anniversary;
+export default Phone;
