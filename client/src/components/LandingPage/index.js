@@ -87,8 +87,7 @@ class LandingPage extends Component {
             </div>
             <div className="col-8">
               <p>
-                Please click <Link to="/question">HERE</Link> to answer a
-                question.
+                Please click <Link to="/phone">HERE</Link> to answer a question.
               </p>
             </div>
           </div>
