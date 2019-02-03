@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import Modal from '../Modal';
 import API from '../../utils/API';
 
-class Phone extends Component {
+class CheckboxQuestion extends Component {
   state = {
     users: [],
     User: {},
-    title: 'Phone Number',
+    title: 'Checkboxes',
     placeholder: 'Enter here (no dashes or spaces).',
-    question: 'what is your phone number?',
+    question: 'please check your selections?',
     userField: '',
-    nextQuestionLink: '/checkbox'
+    nextQuestionLink: '/dashboard'
   };
 
   componentDidMount() {
@@ -56,4 +56,4 @@ class Phone extends Component {
   }
 }
 
-export default Phone;
+export default CheckboxQuestion;
