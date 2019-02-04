@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Modal from '../Modal';
+import CheckboxModal from '../CheckboxModal';
 import API from '../../utils/API';
 
 class CheckboxQuestion extends Component {
@@ -42,7 +42,7 @@ class CheckboxQuestion extends Component {
   };
   render() {
     return (
-      <Modal
+      <CheckboxModal
         handleFormSubmit={this.handleFormSubmit}
         handleInputChange={this.handleInputChange}
         question={this.state.question}
