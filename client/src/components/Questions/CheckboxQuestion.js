@@ -7,7 +7,11 @@ class CheckboxQuestion extends Component {
     users: [],
     User: {},
     title: 'Checkboxes',
-    placeholder: 'Enter here (no dashes or spaces).',
+    choices: [
+      { name: 'Romantic Text', frequency: 7, enabled: true },
+      { name: 'Buy Flowers', frequency: 4, enabled: true },
+      { name: 'Dinner Reservations', frequency: 3, enabled: true }
+    ],
     question: 'please check your selections?',
     userField: '',
     nextQuestionLink: '/dashboard'
@@ -48,9 +52,9 @@ class CheckboxQuestion extends Component {
         question={this.state.question}
         userField={this.state.userField}
         link={this.state.nextQuestionLink}
-        placeholder={this.state.placeholder}
         title={this.state.title}
         user={this.state.User}
+        choices={this.state.choices}
       />
     );
   }
