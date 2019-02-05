@@ -9,8 +9,8 @@ class CheckboxQuestion extends Component {
     title: 'Checkboxes',
     choices: [
       { name: 'Romantic Text', frequency: 7, enabled: true },
-      { name: 'Buy Flowers', frequency: 4, enabled: true },
-      { name: 'Dinner Reservations', frequency: 3, enabled: true }
+      { name: 'Buy Flowers', frequency: 4, enabled: false },
+      { name: 'Dinner Reservations', frequency: 3, enabled: false }
     ],
     question: 'please check your selections?',
     userField: '',
@@ -38,12 +38,15 @@ class CheckboxQuestion extends Component {
   };
 
   handleInputChange = event => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
     this.setState({
       [name]: value
     });
   };
+
   render() {
     return (
       <CheckboxModal

@@ -48,22 +48,17 @@ class CheckboxModal extends Component {
               </div>
               <form>
                 <div className="col">
-                  {this.props.choices.map((choice, i) => (
-                    <div className="form-check">
+                  {this.props.choices.map(choice => (
+                    <div key={choice.name} className="form-check">
                       <input
                         type="checkbox"
                         className="form-check-input"
-                        value=""
-                        id={`defaultCheck${i + 1}`}
                         onChange={this.props.handleInputChange}
                         checked={choice.enabled}
-                        name={choice.name}
+                        name="enabled"
+                        value=""
                       />
-                      <label
-                        className="form-check-label"
-                        for={`defaultCheck${i + 1}`}>
-                        {choice.name}
-                      </label>
+                      <label className="form-check-label">{choice.name}</label>
                       <br />
                     </div>
                   ))}
