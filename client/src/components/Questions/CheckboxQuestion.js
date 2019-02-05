@@ -6,11 +6,11 @@ class CheckboxQuestion extends Component {
   state = {
     users: [],
     User: {},
-    title: 'Checkboxes',
+    title: 'Choices',
     choices: [
-      { name: 'Romantic Text', frequency: 7, enabled: true },
-      { name: 'Buy Flowers', frequency: 4, enabled: false },
-      { name: 'Dinner Reservations', frequency: 3, enabled: false }
+      { description: 'Romantic Text', frequency: 7, enabled: true },
+      { description: 'Buy Flowers', frequency: 4, enabled: false },
+      { description: 'Dinner Reservations', frequency: 3, enabled: false }
     ],
     question: 'please check your selections?',
     userField: '',
@@ -38,13 +38,24 @@ class CheckboxQuestion extends Component {
   };
 
   handleInputChange = event => {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const value = event.target.checked;
+    const name = event.target.name;
+
+    const choice = this.state.choices.filter(obj => {
+      return obj.description === name;
+    });
+
+    const choiceObj = choice.pop();
+
+    console.log(`1. value: ${value}\nname: ${name}`);
+    console.log('2. choiceObj: ', choiceObj);
 
     this.setState({
       [name]: value
     });
+
+    console.log(`3. value: ${value}\nname: ${name}`);
+    console.log('4. choiceObj.enabled: ', choiceObj.enabled);
   };
 
   render() {
