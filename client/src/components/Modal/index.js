@@ -83,17 +83,14 @@ class Modal extends Component {
           style={{
             position: 'relative',
             minHeight: 200,
-            zIndex: 1041,
-            backgroundColor: 'green'
+            zIndex: 1041
           }}>
           <div
             className="toast"
             role="alert"
             aria-live="assertive"
             aria-atomic="true">
-            <div className="toast-body">
-              Hello, world! This is a toast message.
-            </div>
+            <div className="toast-body">{this.props.userField}</div>
           </div>
         </div>
       </div>
