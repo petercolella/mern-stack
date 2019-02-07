@@ -89,7 +89,8 @@ class Modal extends Component {
             className="toast"
             role="alert"
             aria-live="assertive"
-            aria-atomic="true">
+            aria-atomic="true"
+            data-delay="2000">
             <div className="toast-body">
               {this.props.title}: {this.props.userField} has been submitted.
             </div>
