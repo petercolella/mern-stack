@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import API from '../../utils/API';
+const $ = window.$;
 
 class Phone extends Component {
   state = {
@@ -26,7 +27,8 @@ class Phone extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    alert(`userField: ${this.state.userField}`);
+    // alert(`userField: ${this.state.userField}`);
+    $('.toast').toast('show');
     const phoneRegEx = this.state.userField.replace(/\D/g, '');
     API.updateUser(this.state.User._id, {
       phone: phoneRegEx
@@ -42,16 +44,36 @@ class Phone extends Component {
   };
   render() {
     return (
-      <Modal
-        handleFormSubmit={this.handleFormSubmit}
-        handleInputChange={this.handleInputChange}
-        question={this.state.question}
-        userField={this.state.userField}
-        link={this.state.nextQuestionLink}
-        placeholder={this.state.placeholder}
-        title={this.state.title}
-        user={this.state.User}
-      />
+      <div>
+        <Modal
+          handleFormSubmit={this.handleFormSubmit}
+          handleInputChange={this.handleInputChange}
+          question={this.state.question}
+          userField={this.state.userField}
+          link={this.state.nextQuestionLink}
+          placeholder={this.state.placeholder}
+          title={this.state.title}
+          user={this.state.User}
+        />
+        {/* <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            position: 'relative',
+            minHeight: 200
+          }}>
+          <div
+            className="toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true">
+            <div className="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+        </div> */}
+      </div>
     );
   }
 }

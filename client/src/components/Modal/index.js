@@ -76,6 +76,26 @@ class Modal extends Component {
             </div>
           </div>
         </div>
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          className="d-flex justify-content-center align-items-center"
+          style={{
+            position: 'relative',
+            minHeight: 200,
+            zIndex: 1041,
+            backgroundColor: 'green'
+          }}>
+          <div
+            className="toast"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true">
+            <div className="toast-body">
+              Hello, world! This is a toast message.
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
