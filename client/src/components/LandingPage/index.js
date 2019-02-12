@@ -66,6 +66,19 @@ class LandingPage extends Component {
     });
   }
 
+  signOut() {
+    var auth2 = window.gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+      console.log('User signed out.');
+    });
+
+    this.setState({
+      currentUser: '',
+      currentUserMessage: 'Please Sign In.',
+      imageUrl: ''
+    });
+  }
+
   render() {
     return (
       <div style={styles} className="container">
@@ -95,6 +108,9 @@ class LandingPage extends Component {
           </div>
         </div>
         <div id="my-signin2" />
+        <a href="/" onClick={this.signOut}>
+          Sign out
+        </a>
       </div>
     );
   }
