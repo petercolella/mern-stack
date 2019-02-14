@@ -11,7 +11,14 @@ export default {
     return axios.delete('/api/users/' + id);
   },
   saveUser: function(userData) {
-    return axios.post('/api/users', userData);
+    return axios
+      .post('/api/users', userData)
+      .then(function(res) {
+        return res;
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   },
   updateUser: function(id, userData) {
     console.log(userData);
