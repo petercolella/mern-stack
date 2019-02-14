@@ -14,9 +14,30 @@ class Phone extends Component {
     nextQuestionLink: '/checkbox'
   };
 
+  initClient = function() {
+    window.gapi.load('auth2', function() {
+      const GoogleAuth = window.gapi.auth2.init({
+        client_id:
+          '3734915239-ctslo30gfojv1o37cl4gbf6gg5rttu7h.apps.googleusercontent.com'
+      });
+      console.log(
+        GoogleAuth.then(
+          googleUser => {
+            console.log(googleUser.currentUser.Ab.w3.U3);
+          },
+          err => {
+            console.log(err);
+          }
+        )
+      );
+    });
+  };
+
   componentDidMount() {
+    this.initClient();
     this.loadUserInfo();
   }
+
   loadUserInfo = () => {
     API.getUsers().then(res => {
       this.setState({ users: res.data, User: res.data[res.data.length - 1] });
