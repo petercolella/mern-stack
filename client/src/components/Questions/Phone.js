@@ -7,6 +7,7 @@ class Phone extends Component {
   state = {
     users: [],
     User: {},
+    userEmail: 'colella.peter.j@gmail.com',
     title: 'Phone Number',
     placeholder: 'Enter here (no dashes or spaces).',
     question: 'what is your phone number?',
@@ -20,7 +21,7 @@ class Phone extends Component {
         client_id:
           '3734915239-ctslo30gfojv1o37cl4gbf6gg5rttu7h.apps.googleusercontent.com'
       });
-      GoogleAuth.then(
+      return GoogleAuth.then(
         () => {
           const currentUserEmail = GoogleAuth.currentUser
             .get()
@@ -32,12 +33,24 @@ class Phone extends Component {
           console.log(err);
         }
       );
+      //   this.setState({
+      //     userEmail: GoogleAuth.currentUser
+      //       .get()
+      //       .getBasicProfile()
+      //       .getEmail()
+      //   });
     });
+  };
+
+  clientEmail = () => {
+    console.log(this.initClient());
   };
 
   componentDidMount() {
     this.initClient();
+    this.clientEmail();
     this.loadUserInfo();
+    this.findUserByEmail();
   }
 
   loadUserInfo = () => {
@@ -45,6 +58,14 @@ class Phone extends Component {
       this.setState({ users: res.data, User: res.data[res.data.length - 1] });
       console.log(res.data[res.data.length - 1]);
       console.log(res.data[res.data.length - 1]._id);
+    });
+  };
+
+  findUserByEmail = () => {
+    console.log(this.state.userEmail);
+    const email = this.state.userEmail;
+    API.getUserByEmail(email).then(res => {
+      console.log(res.data);
     });
   };
 
