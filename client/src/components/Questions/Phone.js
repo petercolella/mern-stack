@@ -20,15 +20,17 @@ class Phone extends Component {
         client_id:
           '3734915239-ctslo30gfojv1o37cl4gbf6gg5rttu7h.apps.googleusercontent.com'
       });
-      console.log(
-        GoogleAuth.then(
-          googleUser => {
-            console.log(googleUser.currentUser.Ab.w3.U3);
-          },
-          err => {
-            console.log(err);
-          }
-        )
+      GoogleAuth.then(
+        () => {
+          const currentUserEmail = GoogleAuth.currentUser
+            .get()
+            .getBasicProfile()
+            .getEmail();
+          console.log(currentUserEmail);
+        },
+        err => {
+          console.log(err);
+        }
       );
     });
   };
