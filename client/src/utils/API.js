@@ -8,7 +8,7 @@ export default {
     return axios.get('/api/users/' + id);
   },
   getUserByEmail: function(email) {
-    return axios.get('/api/users/email/' + email);
+    return axios.get('/api/users?email=' + email);
   },
   deleteUser: function(id) {
     return axios.delete('/api/users/' + id);
