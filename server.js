@@ -15,10 +15,10 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(routes);
 
-mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/demoDB',
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/demoDB', {
+  useNewUrlParser: true
+});
+mongoose.set('useCreateIndex', true);
 
 app.listen(PORT, function() {
   console.log(`Listening on PORT: ${PORT}`);
