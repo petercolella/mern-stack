@@ -5,7 +5,6 @@ const $ = window.$;
 
 class Phone extends Component {
   state = {
-    users: [],
     User: {},
     userEmail: '',
     title: 'Phone Number',
@@ -29,37 +28,41 @@ class Phone extends Component {
               .get()
               .getBasicProfile()
               .getEmail();
-            console.log(currentUserEmail);
-            that.setState({
-              userEmail: currentUserEmail
-            });
-            console.log(that.state.userEmail);
+            that.setState(
+              {
+                userEmail: currentUserEmail
+              },
+              () => {
+                that.loadUserInfo();
+                // that.findUserByEmail();
+              }
+            );
           },
           err => {
             console.log(err);
           }
         );
     });
+    console.log(this.state.User);
   };
 
   componentDidMount() {
     this.initClient();
-    this.loadUserInfo();
-    this.findUserByEmail();
   }
 
   loadUserInfo = () => {
-    API.getUsers().then(res => {
-      this.setState({ users: res.data, User: res.data[res.data.length - 1] });
-      //   console.log(res.data[res.data.length - 1]);
-      //   console.log(res.data[res.data.length - 1]._id);
+    API.getUserByEmail(this.state.userEmail).then(res => {
+      console.log(res.data);
+      this.setState({ User: res.data });
+      console.log(this.state.User);
+      console.log(this.state.User.name);
     });
   };
 
   findUserByEmail = () => {
     const email = this.state.userEmail;
     API.getUserByEmail(email).then(res => {
-      console.log(res.data);
+      //   console.log(res.data);
     });
   };
 

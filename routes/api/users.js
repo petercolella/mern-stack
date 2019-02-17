@@ -3,7 +3,7 @@ const usersController = require('../../controllers/usersController');
 
 router
   .route('/')
-  .get(usersController.findAll)
+  .get(usersController.findOne)
   .post(usersController.create);
 
 router
