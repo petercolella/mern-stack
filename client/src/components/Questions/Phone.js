@@ -51,7 +51,8 @@ class Phone extends Component {
   loadUserInfo = () => {
     const email = this.state.userEmail;
     API.getUserByEmail(email).then(res => {
-      this.setState({ User: res.data });
+      const resUser = res.data.pop();
+      this.setState({ User: resUser });
     });
   };
 

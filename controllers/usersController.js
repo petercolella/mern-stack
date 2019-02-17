@@ -1,8 +1,8 @@
 const db = require('../models');
 
 module.exports = {
-  findOne: function(req, res) {
-    db.User.findOne(req.query)
+  findAll: function(req, res) {
+    db.User.find(req.query)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
