@@ -34,7 +34,6 @@ class Phone extends Component {
               },
               () => {
                 that.loadUserInfo();
-                // that.findUserByEmail();
               }
             );
           },
@@ -43,7 +42,6 @@ class Phone extends Component {
           }
         );
     });
-    console.log(this.state.User);
   };
 
   componentDidMount() {
@@ -51,18 +49,9 @@ class Phone extends Component {
   }
 
   loadUserInfo = () => {
-    API.getUserByEmail(this.state.userEmail).then(res => {
-      console.log(res.data);
-      this.setState({ User: res.data });
-      console.log(this.state.User);
-      console.log(this.state.User.name);
-    });
-  };
-
-  findUserByEmail = () => {
     const email = this.state.userEmail;
     API.getUserByEmail(email).then(res => {
-      //   console.log(res.data);
+      this.setState({ User: res.data });
     });
   };
 
