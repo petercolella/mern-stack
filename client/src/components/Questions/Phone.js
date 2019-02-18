@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Modal from '../Modal';
 import API from '../../utils/API';
+import initGoogleUser from '../../utils/Google';
 const $ = window.$;
 
 class Phone extends Component {
@@ -15,7 +16,7 @@ class Phone extends Component {
   };
 
   initClient = function() {
-    const that = this;
+    const self = this;
     window.gapi.load('auth2', function() {
       window.gapi.auth2
         .init({
@@ -28,12 +29,12 @@ class Phone extends Component {
               .get()
               .getBasicProfile()
               .getEmail();
-            that.setState(
+            self.setState(
               {
                 userEmail: currentUserEmail
               },
               () => {
-                that.loadUserInfo();
+                self.loadUserInfo();
               }
             );
           },
@@ -42,6 +43,7 @@ class Phone extends Component {
           }
         );
     });
+    console.log(initGoogleUser.initClient());
   };
 
   componentDidMount() {
