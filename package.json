@@ -10,6 +10,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "server": "node server.js",
     "client": "cd client && npm start",
+    "install": "cd client && npm install",
     "seed": "node scripts/seedDB.js",
     "build": "cd client && npm install && npm run build",
     "heroku-postbuild": "npm run build && npm run seed"
@@ -30,7 +31,6 @@
     "express": "^4.16.4",
     "if-env": "^1.0.4",
     "mongoose": "^5.4.5",
-    "nodemon": "^1.18.9",
-    "textbelt": "0.0.4"
+    "nodemon": "^1.18.9"
   }
 }
