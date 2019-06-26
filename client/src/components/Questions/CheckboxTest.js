@@ -19,7 +19,7 @@ class CheckboxQuestion extends Component {
   }
 
   loadUserInfo = () => {
-    API.getUser(this.state.user_id).then(res => {
+    API.getUserTest(this.state.user_id).then(res => {
       this.setState({ User: res.data });
       console.log('User:', this.state.User);
     });

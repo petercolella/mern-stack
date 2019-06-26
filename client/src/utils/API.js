@@ -7,6 +7,9 @@ export default {
   getUser: function(id) {
     return axios.get('/api/users/' + id);
   },
+  getUserTest: function(id) {
+    return axios.get('/api/users/test/' + id);
+  },
   getUserByEmail: function(email) {
     return axios.get('/api/users?email=' + email);
   },
