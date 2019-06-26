@@ -8,7 +8,7 @@ class CheckboxQuestion extends Component {
     User: {},
     title: 'Choices',
     choices: [
-      { description: 'Romantic Text', frequency: 7, enabled: true },
+      { description: 'Romantic Text', frequency: 7, enabled: false },
       { description: 'Buy Flowers', frequency: 4, enabled: false },
       { description: 'Dinner Reservations', frequency: 3, enabled: false }
     ],
@@ -23,8 +23,8 @@ class CheckboxQuestion extends Component {
   loadUserInfo = () => {
     API.getUsers().then(res => {
       this.setState({ users: res.data, User: res.data[res.data.length - 1] });
-      console.log(res.data[res.data.length - 1]);
-      console.log(res.data[res.data.length - 1]._id);
+      //   console.log(res.data[res.data.length - 1]);
+      //   console.log(res.data[res.data.length - 1]._id);
     });
   };
 
@@ -38,24 +38,15 @@ class CheckboxQuestion extends Component {
   };
 
   handleInputChange = event => {
-    const value = event.target.checked;
-    const name = event.target.name;
+    const { name, checked } = event.target;
 
-    const choice = this.state.choices.filter(obj => {
-      return obj.description === name;
-    });
-
-    const choiceObj = choice.pop();
-
-    console.log(`1. value: ${value}\nname: ${name}`);
-    console.log('2. choiceObj: ', choiceObj);
-
-    this.setState({
-      [name]: value
-    });
-
-    console.log(`3. value: ${value}\nname: ${name}`);
-    console.log('4. choiceObj.enabled: ', choiceObj.enabled);
+    this.setState(prevState => ({
+      choices: prevState.choices.map(obj =>
+        obj.description === name
+          ? Object.assign(obj, { enabled: checked })
+          : obj
+      )
+    }));
   };
 
   render() {
