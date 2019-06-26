@@ -6,7 +6,8 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   imageUrl: { type: String },
   phone: { type: String },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now },
+  choices: { type: Array }
 });
 
 const User = mongoose.model('User', userSchema);

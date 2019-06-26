@@ -4,12 +4,13 @@ import API from '../../utils/API';
 
 class CheckboxQuestion extends Component {
   state = {
+    user_id: '5c67a54ea10b120544c9e8c2',
     User: {},
     title: 'Choices',
     choices: [
-      { description: 'Romantic Text', frequency: 7, enabled: false },
-      { description: 'Buy Flowers', frequency: 4, enabled: false },
-      { description: 'Dinner Reservations', frequency: 3, enabled: false }
+      { description: 'Choice One', enabled: false },
+      { description: 'Choice Two', enabled: false },
+      { description: 'Choice Three', enabled: false }
     ]
   };
 
@@ -17,19 +18,16 @@ class CheckboxQuestion extends Component {
     this.loadUserInfo();
   }
   loadUserInfo = () => {
-    API.getUsers().then(res => {
-      this.setState({ users: res.data, User: res.data[res.data.length - 1] });
-      //   console.log(res.data[res.data.length - 1]);
-      //   console.log(res.data[res.data.length - 1]._id);
+    API.getUser(this.state.user_id).then(res => {
+      this.setState({ User: res.data });
+      console.log('User:', this.state.User);
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    alert(`userField: ${this.state.userField}`);
-    const phoneRegEx = this.state.userField.replace(/\D/g, '');
     API.updateUser(this.state.User._id, {
-      phone: phoneRegEx
+      choices: this.state.choices
     });
   };
 
