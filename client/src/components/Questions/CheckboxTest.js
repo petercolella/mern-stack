@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import CheckboxModalTest from '../CheckboxModal/CheckboxModalTest';
 import API from '../../utils/API';
-const userId = process.env.USER_ID || '5c67a54ea10b120544c9e8c2';
 
 class CheckboxQuestion extends Component {
   state = {
-    user_id: userId,
+    user_id: '5c67a54ea10b120544c9e8c2',
     User: {},
     title: 'Choices',
     choices: [
