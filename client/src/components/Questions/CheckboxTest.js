@@ -16,18 +16,18 @@ class CheckboxQuestion extends Component {
 
   componentDidMount() {
     this.loadUserInfo();
+    console.log('User:', this.state.User);
   }
   loadUserInfo = () => {
     API.getUser(this.state.user_id).then(res => {
       this.setState({ User: res.data });
-      console.log('User:', this.state.User);
     });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
     API.updateUser(this.state.User._id, {
-      choices: this.state.choices
+      choices: this.state.choices.filter(choice => choice.enabled === true)
     });
   };
 
