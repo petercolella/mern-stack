@@ -16,7 +16,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/demoDB', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 mongoose.set('useCreateIndex', true);
 

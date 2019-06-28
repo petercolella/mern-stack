@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-// This file empties the users collection and the nudge collection and inserts the respective info below
-
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/demoDB', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 mongoose.set('useCreateIndex', true);
 
@@ -54,11 +53,17 @@ db.Symptom.deleteMany({})
             console.log('Find Symptom Err: ', err);
             process.exit(1);
           }
-          body.symptoms.push(foundSymptom);
-          console.log('body', body);
+          console.log('foundSymptom', foundSymptom);
+          console.log('body._id', body._id);
+          db.Body.findOneAndUpdate(
+            { _id: body._id },
+            { $push: { symptoms: foundSymptom._id } },
+            { new: true }
+          ).then(result =>
+            console.log('findOneAndUpdate result.symptoms\n', result.symptoms)
+          );
         });
       });
-      body.save((err, savedBody) => console.log(savedBody));
     });
   })
   .catch(err => {
