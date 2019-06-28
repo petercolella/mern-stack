@@ -1,3 +1,5 @@
 module.exports = {
-  User: require('./user')
+  User: require('./user'),
+  Body: require('./body'),
+  Symptom: require('./symptom')
 };
