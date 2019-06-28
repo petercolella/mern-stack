@@ -47,21 +47,29 @@ db.Symptom.deleteMany({})
   .then(() => db.Body.collection.insertMany(bodySeed))
   .then(data => {
     data.ops.forEach(body => {
+      const symptomsArr = [];
       body.symptoms.forEach((symptom, i) => {
         db.Symptom.findOne({ name: symptom.name }, (err, foundSymptom) => {
           if (err) {
             console.log('Find Symptom Err: ', err);
             process.exit(1);
           }
-          console.log('foundSymptom', foundSymptom);
-          console.log('body._id', body._id);
+          symptomsArr.push(foundSymptom._id);
+          //   db.Body.findOneAndUpdate(
+          //     { _id: body._id },
+          //     { $push: { symptoms: foundSymptom._id } },
+          //     { new: true }
+          //   ).then(result =>
+          //     console.log('findOneAndUpdate result.symptoms\n', result.symptoms)
+          //   );
+          //   console.log('symptomsArr', symptomsArr, '\nbody', body);
+        }).then(() => {
           db.Body.findOneAndUpdate(
             { _id: body._id },
-            { $push: { symptoms: foundSymptom._id } },
-            { new: true }
-          ).then(result =>
-            console.log('findOneAndUpdate result.symptoms\n', result.symptoms)
-          );
+            { $set: { symptoms: symptomsArr } },
+            { multi: true }
+          ).then(result => console.log('result', result));
+          console.log('symptomsArr2', symptomsArr, '\nbody', body);
         });
       });
     });
