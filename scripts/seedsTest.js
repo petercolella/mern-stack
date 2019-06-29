@@ -56,6 +56,17 @@ db.Symptom.deleteMany({})
             process.exit(1);
           }
           symptomsArr.push(foundSymptom._id);
+          console.log(`
+          **********
+          newRecords: ${newRecords}
+
+          body: ${JSON.stringify(body)}
+
+          symptomsArr: ${symptomsArr}
+
+          symptom: ${JSON.stringify(symptom)}
+          **********
+          `);
         }).then(() => {
           db.Body.findOneAndUpdate(
             { _id: body._id },
@@ -67,10 +78,25 @@ db.Symptom.deleteMany({})
                 process.exit(1);
               }
               newRecords.push(updatedBody);
+              console.log(`
+          ==========
+          newRecords: ${newRecords}
+
+          body: ${JSON.stringify(body)}
+
+          symptomsArr: ${symptomsArr}
+          
+          symptom: ${JSON.stringify(symptom)}
+          ==========
+          `);
             }
           )
             .then(() => {
-              console.log('New Records: ', newRecords);
+              console.log(`
+            ----------
+            New Records: ${newRecords}
+            ----------
+            `);
               process.exit(0);
             })
             .catch(err => {
