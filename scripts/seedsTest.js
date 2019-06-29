@@ -46,6 +46,7 @@ db.Symptom.deleteMany({})
   .then(() => db.Body.deleteMany({}))
   .then(() => db.Body.collection.insertMany(bodySeed))
   .then(data => {
+    const newRecords = [];
     data.ops.forEach(body => {
       const symptomsArr = [];
       body.symptoms.forEach(symptom => {
@@ -59,13 +60,24 @@ db.Symptom.deleteMany({})
           db.Body.findOneAndUpdate(
             { _id: body._id },
             { $set: { symptoms: symptomsArr } },
-            { multi: true }
-          ).then(result => console.log('result', result));
+            { multi: true },
+            (err, updatedBody) => {
+              if (err) {
+                console.log('Update Body Err: ', err);
+                process.exit(1);
+              }
+              newRecords.push(updatedBody);
+            }
+          )
+            .then(() => {
+              console.log('New Records: ', newRecords);
+              process.exit(0);
+            })
+            .catch(err => {
+              console.error(err);
+              process.exit(1);
+            });
         });
       });
     });
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
   });
