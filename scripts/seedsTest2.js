@@ -43,7 +43,7 @@ db.Symptom.deleteMany({})
           console.log('symptom', symptom);
           db.Body.findOneAndUpdate(
             { _id: body._id },
-            { $set: { symptoms: symptom._id } },
+            { $push: { symptoms: symptom._id } },
             { multi: true },
             (err, updatedBody) => {
               if (err) {
