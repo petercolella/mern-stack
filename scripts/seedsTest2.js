@@ -32,26 +32,30 @@ db.Symptom.deleteMany({})
   .then(() => db.Body.deleteMany({}))
   .then(() => db.Body.collection.insertMany(bodySeed))
   .then(data => {
-    data.ops.forEach(body => {
+    return data.ops.forEach(body => {
       console.log('body', body);
-      db.Symptom.find({}, (err, foundSymptoms) => {
+      return db.Symptom.find({}, (err, foundSymptoms) => {
         if (err) {
           console.log('Find Symptom Err: ', err);
           process.exit(1);
         }
-        foundSymptoms.forEach(symptom => {
-          console.log('symptom', symptom);
-          db.Body.findOneAndUpdate(
-            { _id: body._id },
-            { $push: { symptoms: symptom._id } },
-            { multi: true },
-            (err, updatedBody) => {
-              if (err) {
-                console.log('Update Body Err: ', err);
-                process.exit(1);
+        return new Promise((resolve, reject) => {
+          return foundSymptoms.forEach(symptom => {
+            console.log('symptom', symptom);
+            return db.Body.findOneAndUpdate(
+              { _id: body._id },
+              { $push: { symptoms: symptom._id } },
+              { multi: true },
+              (err, updatedBody) => {
+                if (err) {
+                  console.log('Update Body Err: ', err);
+                  process.exit(1);
+                }
               }
-            }
-          );
+            );
+          });
+          resolve(process.exit(0));
+          reject(process.exit(1));
         });
       });
     });
