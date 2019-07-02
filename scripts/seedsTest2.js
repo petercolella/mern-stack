@@ -27,6 +27,35 @@ const symptomSeed = [
   }
 ];
 
+mongoose.Model.findSymptoms = function() {
+  const promise = new mongoose.Promise();
+  this.find({}, function(err, foundSymptoms) {
+    if (err) {
+      promise.reject(err);
+    } else {
+      promise.resolve(foundSymptoms);
+    }
+  });
+  return promise;
+};
+
+mongoose.Model.updateBody = function(body, symptom) {
+  const promise = new mongoose.Promise();
+  this.findOneAndUpdate(
+    { _id: body._id },
+    { $push: { symptoms: symptom._id } },
+    { multi: true },
+    function(err, updatedBody) {
+      if (err) {
+        promise.reject(err);
+      } else {
+        promise.resolve(updatedBody);
+      }
+    }
+  );
+  return promise;
+};
+
 db.Symptom.deleteMany({})
   .then(() => db.Symptom.collection.insertMany(symptomSeed))
   .then(() => db.Body.deleteMany({}))
@@ -39,23 +68,19 @@ db.Symptom.deleteMany({})
           console.log('Find Symptom Err: ', err);
           process.exit(1);
         }
-        return new Promise((resolve, reject) => {
-          return foundSymptoms.forEach(symptom => {
-            console.log('symptom', symptom);
-            return db.Body.findOneAndUpdate(
-              { _id: body._id },
-              { $push: { symptoms: symptom._id } },
-              { multi: true },
-              (err, updatedBody) => {
-                if (err) {
-                  console.log('Update Body Err: ', err);
-                  process.exit(1);
-                }
+        return foundSymptoms.forEach(symptom => {
+          console.log('symptom', symptom);
+          return db.Body.findOneAndUpdate(
+            { _id: body._id },
+            { $push: { symptoms: symptom._id } },
+            { multi: true },
+            (err, updatedBody) => {
+              if (err) {
+                console.log('Update Body Err: ', err);
+                process.exit(1);
               }
-            );
-          });
-          resolve(process.exit(0));
-          reject(process.exit(1));
+            }
+          );
         });
       });
     });
