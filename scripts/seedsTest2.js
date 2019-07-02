@@ -28,31 +28,33 @@ const symptomSeed = [
 ];
 
 mongoose.Model.findSymptoms = function() {
-  const promise = new mongoose.Promise();
-  this.find({}, function(err, foundSymptoms) {
-    if (err) {
-      promise.reject(err);
-    } else {
-      promise.resolve(foundSymptoms);
-    }
+  let promise = new Promise((resolve, reject) => {
+    this.find({}, function(err, foundSymptoms) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(foundSymptoms);
+      }
+    });
   });
   return promise;
 };
 
 mongoose.Model.updateBody = function(body, symptom) {
-  const promise = new mongoose.Promise();
-  this.findOneAndUpdate(
-    { _id: body._id },
-    { $push: { symptoms: symptom._id } },
-    { multi: true },
-    function(err, updatedBody) {
-      if (err) {
-        promise.reject(err);
-      } else {
-        promise.resolve(updatedBody);
+  let promise = new Promise((resolve, reject) => {
+    this.findOneAndUpdate(
+      { _id: body._id },
+      { $push: { symptoms: symptom._id } },
+      { multi: true },
+      function(err, updatedBody) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(updatedBody);
+        }
       }
-    }
-  );
+    );
+  });
   return promise;
 };
 
@@ -61,26 +63,17 @@ db.Symptom.deleteMany({})
   .then(() => db.Body.deleteMany({}))
   .then(() => db.Body.collection.insertMany(bodySeed))
   .then(data => {
-    return data.ops.forEach(body => {
+    data.ops.forEach(body => {
       console.log('body', body);
-      return db.Symptom.find({}, (err, foundSymptoms) => {
-        if (err) {
-          console.log('Find Symptom Err: ', err);
-          process.exit(1);
-        }
-        return foundSymptoms.forEach(symptom => {
+      return db.Symptom.findSymptoms().then(foundSymptoms => {
+        foundSymptoms.forEach(symptom => {
           console.log('symptom', symptom);
-          return db.Body.findOneAndUpdate(
-            { _id: body._id },
-            { $push: { symptoms: symptom._id } },
-            { multi: true },
-            (err, updatedBody) => {
-              if (err) {
-                console.log('Update Body Err: ', err);
-                process.exit(1);
-              }
-            }
-          );
+          return db.Body.updateBody(body, symptom)
+            .then(() => process.exit(0))
+            .catch(err => {
+              console.log('Error: ', err.message);
+              process.exit(1);
+            });
         });
       });
     });
