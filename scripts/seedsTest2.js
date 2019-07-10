@@ -34,21 +34,23 @@ db.Symptom.deleteMany({})
   .then(() => db.Body.collection.insertMany(bodySeed))
   .then(data => {
     data.ops.forEach(body => {
-      return db.Symptom.find({}, (err, foundSymptoms) => {
-        if (err) process.exit(1);
-        foundSymptoms.forEach(symptom => {
-          return db.Body.findOneAndUpdate(
-            { _id: body._id },
-            { $push: { symptoms: symptom._id } },
-            { new: true }
-          )
-            .exec()
-            .then(updatedBody => console.log('updatedBody', updatedBody))
-            .catch(err => {
-              console.log('Error: ', err.message);
-              process.exit(1);
-            });
+      return db.Symptom.find()
+        .exec()
+        .then(foundSymptoms => {
+          const promises = foundSymptoms.map(symptom => {
+            return db.Body.findOneAndUpdate(
+              { _id: body._id },
+              { $push: { symptoms: symptom._id } },
+              { new: true }
+            )
+              .exec()
+              .then(updatedBody => console.log('updatedBody', updatedBody))
+              .catch(err => {
+                console.log('Error: ', err.message);
+                process.exit(1);
+              });
+          });
+          Promise.all(promises).then(() => process.exit(0));
         });
-      });
     });
   });
