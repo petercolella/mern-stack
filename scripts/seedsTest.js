@@ -57,15 +57,15 @@ db.Symptom.deleteMany({})
           }
           symptomsArr.push(foundSymptom._id);
           console.log(`
-          **********
-          newRecords: ${newRecords}
+*************
+newRecords: ${newRecords}
 
-          body: ${JSON.stringify(body)}
+body: ${JSON.stringify(body)}
 
-          symptomsArr: ${symptomsArr}
+symptomsArr: ${symptomsArr}
 
-          symptom: ${JSON.stringify(symptom)}
-          **********
+symptom: ${JSON.stringify(symptom)}
+*************
           `);
         }).then(() => {
           db.Body.findOneAndUpdate(
@@ -79,23 +79,23 @@ db.Symptom.deleteMany({})
               }
               newRecords.push(updatedBody);
               console.log(`
-          ==========
-          newRecords: ${newRecords}
+=============
+newRecords: ${newRecords}
 
-          body: ${JSON.stringify(body)}
+body: ${JSON.stringify(body)}
 
-          symptomsArr: ${symptomsArr}
-          
-          symptom: ${JSON.stringify(symptom)}
-          ==========
+symptomsArr: ${symptomsArr}
+
+symptom: ${JSON.stringify(symptom)}
+=============
           `);
             }
           )
             .then(() => {
               console.log(`
-            ----------
-            New Records: ${newRecords}
-            ----------
+-------------
+New Records: ${newRecords}
+-------------
             `);
               process.exit(0);
             })
