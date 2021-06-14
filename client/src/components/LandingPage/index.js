@@ -1,48 +1,49 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import API from '../../utils/API';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import API from "../../utils/API";
+import FetchContainer from "./FetchContainer";
 
 const styles = {
   marginTop: 120,
   imgStyle: {
     height: 96,
-    width: 'auto'
-  }
+    width: "auto",
+  },
 };
 
 class LandingPage extends Component {
   state = {
-    currentUser: '',
-    currentUserMessage: 'Please Sign In.',
-    imageUrl: ''
+    currentUser: "",
+    currentUserMessage: "Please Sign In.",
+    imageUrl: "",
   };
 
   createUser(profile) {
     API.saveUser({
       name: profile.getName(),
       email: profile.getEmail(),
-      imageUrl: profile.getImageUrl()
+      imageUrl: profile.getImageUrl(),
     })
-      .then(res => {
+      .then((res) => {
         console.log(res.data._id);
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }
 
-  onSignIn = googleUser => {
+  onSignIn = (googleUser) => {
     var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
 
     if (profile.getName()) {
       this.setState({
         currentUser: profile.getName(),
         currentUserMessage: `Hello, ${profile.getName()}`,
-        imageUrl: profile.getImageUrl()
+        imageUrl: profile.getImageUrl(),
       });
     }
 
@@ -50,7 +51,7 @@ class LandingPage extends Component {
   };
 
   onSuccess(googleUser) {
-    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    console.log("Logged in as: " + googleUser.getBasicProfile().getName());
 
     // ******* NEED REDIRECT CODE TO SEND TO PAGE FOR SIGN UP *************
   }
@@ -59,27 +60,27 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    window.gapi.signin2.render('my-signin2', {
-      scope: 'profile email',
+    window.gapi.signin2.render("my-signin2", {
+      scope: "profile email",
       width: 240,
       height: 50,
       longtitle: true,
-      theme: 'dark',
+      theme: "dark",
       onsuccess: this.onSignIn,
-      onfailure: this.onFailure
+      onfailure: this.onFailure,
     });
   }
 
   signOut = () => {
     var auth2 = window.gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function() {
-      console.log('User signed out.');
+    auth2.signOut().then(function () {
+      console.log("User signed out.");
     });
 
     this.setState({
-      currentUser: '',
-      currentUserMessage: 'Please Sign In.',
-      imageUrl: ''
+      currentUser: "",
+      currentUserMessage: "Please Sign In.",
+      imageUrl: "",
     });
   };
 
@@ -112,14 +113,16 @@ class LandingPage extends Component {
           </div>
         </div>
         <div>
-          <div id="my-signin2" style={{ float: 'left' }} />
+          <div id="my-signin2" style={{ float: "left" }} />
           <button
             className="btn btn-primary"
             onClick={this.signOut}
-            style={{ float: 'left', margin: 5 }}>
+            style={{ float: "left", margin: 5 }}
+          >
             Sign out
           </button>
         </div>
+        <FetchContainer />
       </div>
     );
   }
